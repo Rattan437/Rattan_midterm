@@ -52,10 +52,12 @@ public class LibraryItem {
             System.out.println("Invalid selection. Please try again.");
             return;
         }
+        
+        BookAvailability find = new BookAvailability();
 
-        if (bookAvailability[choice]) {
+        if (find.bookAva(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            bookAvailability[choice] = false;
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
