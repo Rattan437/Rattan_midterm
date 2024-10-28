@@ -45,6 +45,7 @@ public class LibraryItem {
     }
     
     public static void selectBook(Scanner sc) {
+        BookAvailabilityChecker checker = new BookAvailabilityChecker();
         System.out.print("\nEnter the number of the book you want to borrow: ");
         int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
 
