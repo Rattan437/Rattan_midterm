@@ -11,11 +11,28 @@ package midtermexamf24_83052_partb;
 
 import java.util.Scanner;
 
+// Class to manage book availability
+class BookAvailability {
+    private boolean[] bookAvailabilityArray;
+
+    public BookAvailability(boolean[] bookAvailabilityArray) {
+        this.bookAvailabilityArray = bookAvailabilityArray;
+    }
+
+    public boolean isAvailable(int index) {
+        return bookAvailabilityArray[index];
+    }
+
+    public void borrowBook(int index) {
+        bookAvailabilityArray[index] = false; // Mark the book as borrowed
+    }
+}
+
+// Main class representing the library system
 public class LibraryItem {
     
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
-    private static boolean[] bookAvailabilityArray = {true, true, true, true}; // Initially all books are available
-    private static BookAvailability availabilityChecker = new BookAvailability(bookAvailabilityArray);
+    private static BookAvailability availabilityChecker = new BookAvailability(new boolean[] {true, true, true, true}); // Initially all books are available
 
     public LibraryItem() {
     }
@@ -27,23 +44,17 @@ public class LibraryItem {
     public static void setBooks(String[] books) {
         LibraryItem.books = books;
     }
-
-    public static boolean[] getBookAvailability() {
-        return bookAvailabilityArray;
-    }
-
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailabilityArray = bookAvailability;
-    }
     
+    // Display the catalog of books
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
         for (int i = 0; i < books.length; i++) {
-            String availability = bookAvailabilityArray[i] ? "Available" : "Unavailable";
+            String availability = availabilityChecker.isAvailable(i) ? "Available" : "Unavailable";
             System.out.println((i + 1) + ". " + books[i] + " - " + availability);
         }
     }
     
+    // Select a book to borrow
     public static void selectBook(Scanner sc) {
         System.out.print("\nEnter the number of the book you want to borrow: ");
         int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
