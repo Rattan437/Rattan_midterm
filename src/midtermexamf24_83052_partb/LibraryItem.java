@@ -11,13 +11,12 @@ package midtermexamf24_83052_partb;
 
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class LibraryItem {
     
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
-    private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-    
+    private static boolean[] bookAvailabilityArray = {true, true, true, true}; // Initially all books are available
+    private static BookAvailability availabilityChecker = new BookAvailability(bookAvailabilityArray);
+
     public LibraryItem() {
     }
 
@@ -30,17 +29,18 @@ public class LibraryItem {
     }
 
     public static boolean[] getBookAvailability() {
-        return bookAvailability;
+        return bookAvailabilityArray;
     }
 
     public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
+        LibraryItem.bookAvailabilityArray = bookAvailability;
     }
     
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
         for (int i = 0; i < books.length; i++) {
-            System.out.println((i + 1) + ". " + books[i]);
+            String availability = bookAvailabilityArray[i] ? "Available" : "Unavailable";
+            System.out.println((i + 1) + ". " + books[i] + " - " + availability);
         }
     }
     
@@ -53,9 +53,9 @@ public class LibraryItem {
             return;
         }
 
-        if (bookAvailability[choice]) {
+        if (availabilityChecker.isAvailable(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            availabilityChecker.borrowBook(choice); // Mark the book as borrowed
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
