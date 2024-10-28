@@ -6,7 +6,7 @@ package midtermexamf24_83052_partb;
 
 /**
  *
- * @author fagun
+ * @author Atinder
  */
 
 import java.util.Scanner;
