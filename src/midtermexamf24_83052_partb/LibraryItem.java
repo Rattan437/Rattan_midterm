@@ -1,80 +1,92 @@
-/*
+/**
+ * This class is a basic library system allowing users to view and borrow books.
+ * Each book has an availability status that updates once borrowed.
+ * 
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package midtermexamf24_83052_partb;
 
+import java.util.Scanner;
+
 /**
+ * LibraryItem class - simulates a library system with basic book-borrowing functionality.
+ * Each book in the list can either be available or checked out.
  *
- * @author fagun
+ * @author Aatif Banday
  */
-
-import java.util.Scanner;
-
-import java.util.Scanner;
-
 public class LibraryItem {
     
-    private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
-    private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-    
+    private static String[] bookTitles = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
+    private static boolean[] isAvailable = {true, true, true, true}; // True means the book is available
+
     public LibraryItem() {
+        // Constructor - not currently used
     }
 
-    public static String[] getBooks() {
-        return books;
+    // Retrieve the list of book titles
+    public static String[] getBookTitles() {
+        return bookTitles;
     }
 
-    public static void setBooks(String[] books) {
-        LibraryItem.books = books;
+    // Set the list of book titles
+    public static void setBookTitles(String[] bookTitles) {
+        LibraryItem.bookTitles = bookTitles;
     }
 
-    public static boolean[] getBookAvailability() {
-        return bookAvailability;
+    // Retrieve book availability status
+    public static boolean[] getIsAvailable() {
+        return isAvailable;
     }
 
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
+    // Set book availability status
+    public static void setIsAvailable(boolean[] isAvailable) {
+        LibraryItem.isAvailable = isAvailable;
     }
     
-    public static void displayCatalog() {
-        System.out.println("Welcome to the library! Here is a list of available books:");
-        for (int i = 0; i < books.length; i++) {
-            System.out.println((i + 1) + ". " + books[i]);
+    // Display the catalog of books, including availability
+    public static void showCatalog() {
+        System.out.println("Welcome! Here’s our book collection:");
+        for (int i = 0; i < bookTitles.length; i++) {
+            // Adding "(Unavailable)" if the book is borrowed
+            String availability = isAvailable[i] ? "Available" : "Unavailable";
+            System.out.println((i + 1) + ". " + bookTitles[i] + " - " + availability);
         }
     }
     
-    public static void selectBook(Scanner sc) {
-        System.out.print("\nEnter the number of the book you want to borrow: ");
-        int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+    // Allow the user to select a book to borrow
+    public static void chooseBook(Scanner scanner) {
+        System.out.print("\nPlease enter the number of the book you’d like to borrow: ");
+        int choice = scanner.nextInt() - 1; // Adjusting for 0-based index
 
-        if (choice < 0 || choice >= books.length) {
-            System.out.println("Invalid selection. Please try again.");
+        if (choice < 0 || choice >= bookTitles.length) {
+            System.out.println("Oops! That’s not a valid selection. Try again.");
             return;
         }
 
-        if (bookAvailability[choice]) {
-            System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+        if (isAvailable[choice]) {
+            System.out.println("You chose: " + bookTitles[choice] + ". Enjoy your book!");
+            isAvailable[choice] = false; // Mark the book as borrowed
         } else {
-            System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
+            System.out.println("Sorry, " + bookTitles[choice] + " is currently borrowed. Try another one.");
         }
     }
     
+    // Main program loop for borrowing books
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        boolean continueBorrowing = true;
+        Scanner scanner = new Scanner(System.in);
+        boolean keepBorrowing = true;
 
-        while (continueBorrowing) {
-            displayCatalog();
-            selectBook(sc);
+        while (keepBorrowing) {
+            showCatalog();
+            chooseBook(scanner);
 
-            System.out.print("\nWould you like to borrow another book? (yes/no): ");
-            String response = sc.next().trim().toLowerCase();
-            continueBorrowing = response.equals("yes");
+            System.out.print("\nDo you want to borrow another book? (yes/no): ");
+            String response = scanner.next().trim().toLowerCase();
+            keepBorrowing = response.equals("yes");
         }
 
-        System.out.println("Thank you for using the library!");
-        sc.close();
+        System.out.println("Thanks for visiting our library!");
+        scanner.close();
     }
 }
