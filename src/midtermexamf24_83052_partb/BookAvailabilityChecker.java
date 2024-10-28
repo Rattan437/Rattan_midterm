@@ -10,6 +10,9 @@ package midtermexamf24_83052_partb;
  */
 public class BookAvailabilityChecker {
     
+// Principle: Cohesion
+    // The BookAvailabilityChecker class is solely responsible for managing the availability of books,
+    // making it highly cohesive as its methods focus only on availability checking and updating.
     public static boolean isAvailable(int bookIndex, boolean[] availability) {
         if (bookIndex < 0 || bookIndex >= availability.length) {
             return false;
@@ -19,8 +22,7 @@ public class BookAvailabilityChecker {
 
     public static void markAsBorrowed(int bookIndex, boolean[] availability) {
         if (bookIndex >= 0 && bookIndex < availability.length) {
-            availability[bookIndex] = false; 
+            availability[bookIndex] = false;
         }
     }
 }
-

@@ -15,36 +15,32 @@ public class LibraryItem {
     
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
     private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-    
-    public LibraryItem() {
-    }
+
+    public LibraryItem() {}
 
     public static String[] getBooks() {
         return books;
-    }
-
-    public static void setBooks(String[] books) {
-        LibraryItem.books = books;
     }
 
     public static boolean[] getBookAvailability() {
         return bookAvailability;
     }
 
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
-    }
-    
+    // Principle: Cohesion
+    // The displayCatalog method only handles displaying books, keeping its responsibility focused.
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
         for (int i = 0; i < books.length; i++) {
             System.out.println((i + 1) + ". " + books[i]);
         }
     }
-    
-   public static void selectBook(Scanner sc) {
+
+    // Principle: Loose Coupling
+    // LibraryItem class delegates the responsibility of checking and marking availability to BookAvailabilityChecker,
+    // reducing direct dependency on availability management.
+    public static void selectBook(Scanner sc) {
         System.out.print("\nEnter the number of the book you want to borrow: ");
-        int choice = sc.nextInt() - 1; 
+        int choice = sc.nextInt() - 1;
 
         if (choice < 0 || choice >= books.length) {
             System.out.println("Invalid selection. Please try again.");
@@ -53,12 +49,12 @@ public class LibraryItem {
 
         if (BookAvailabilityChecker.isAvailable(choice, bookAvailability)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            BookAvailabilityChecker.markAsBorrowed(choice, bookAvailability); 
+            BookAvailabilityChecker.markAsBorrowed(choice, bookAvailability);
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
     }
-    
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean continueBorrowing = true;
