@@ -9,18 +9,18 @@ package midtermexamf24_83052_partb;
  * @author fagun
  */
 
-import java.util.Scanner;
+
 
 import java.util.Scanner;
 
 public class LibraryItem {
     
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
-    private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
     
     public LibraryItem() {
     }
-
+    
+    
     public static String[] getBooks() {
         return books;
     }
@@ -29,13 +29,6 @@ public class LibraryItem {
         LibraryItem.books = books;
     }
 
-    public static boolean[] getBookAvailability() {
-        return bookAvailability;
-    }
-
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
-    }
     
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
@@ -52,29 +45,21 @@ public class LibraryItem {
             System.out.println("Invalid selection. Please try again.");
             return;
         }
-
-        if (bookAvailability[choice]) {
+        
+        /**
+        *
+        * @author sangh
+        * I moved the methods that check and set book availability into a new class called Availability.
+        * This is an example of increasing cohesion because methods in a class should be closely related.
+        */
+        Availability bookAvailability = new Availability();
+              
+          
+        if (bookAvailability.getBookAvailability()[choice]) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            bookAvailability.getBookAvailability()[choice] = false; // Mark the book as borrowed
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
-    }
-    
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        boolean continueBorrowing = true;
-
-        while (continueBorrowing) {
-            displayCatalog();
-            selectBook(sc);
-
-            System.out.print("\nWould you like to borrow another book? (yes/no): ");
-            String response = sc.next().trim().toLowerCase();
-            continueBorrowing = response.equals("yes");
-        }
-
-        System.out.println("Thank you for using the library!");
-        sc.close();
     }
 }
