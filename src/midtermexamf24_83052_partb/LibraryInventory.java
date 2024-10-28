@@ -1,21 +1,21 @@
 package midtermexamf24_83052_partb;
 
 /**
- * LibraryInventory is responsible for managing the availability of books.
+ * LibraryInventory manages the availability status of each book.
  * 
  * Principle: Single Responsibility Principle (SRP)
- * This class has one reason to change - managing book availability.
+ * This class handles a single task: managing book availability.
  */
 public class LibraryInventory {
 
-    // Encapsulated book availability data
+    // Private array for book availability
     private static boolean[] bookAvailability = {true, true, true, true};
 
     /**
-     * Checks if the book at the specified index is available.
+     * Checks if a specific book is available.
      *
      * Principle: Encapsulation
-     * The availability array is private, and access is controlled via methods.
+     * The availability data is private and accessible only via methods.
      */
     public static boolean isBookAvailable(int index) {
         return index >= 0 && index < bookAvailability.length && bookAvailability[index];
@@ -25,7 +25,7 @@ public class LibraryInventory {
      * Marks a book as borrowed by setting its availability to false.
      *
      * Principle: Encapsulation
-     * Only this class can change book availability, maintaining control over the data.
+     * Only this class can update book availability, ensuring data consistency.
      */
     public static void borrowBook(int index) {
         if (index >= 0 && index < bookAvailability.length) {
@@ -37,7 +37,7 @@ public class LibraryInventory {
      * Marks a book as returned by setting its availability to true.
      *
      * Principle: Encapsulation
-     * Book return updates are controlled, reinforcing data consistency.
+     * Controlled data updates reinforce data integrity.
      */
     public static void returnBook(int index) {
         if (index >= 0 && index < bookAvailability.length) {
