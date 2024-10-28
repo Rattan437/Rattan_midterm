@@ -1,66 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package midtermexamf24_83052_partb;
 
+import java.util.Scanner;
+
 /**
- *
- * @author fagun
+ * LibraryItem class is responsible for user interaction related to borrowing books.
+ * 
+ * Principle: Single Responsibility Principle (SRP)
+ * This class focuses on user interaction and book selection, while availability checks are handled by LibraryInventory.
  */
-
-import java.util.Scanner;
-
-import java.util.Scanner;
-
 public class LibraryItem {
-    
+
+    // Encapsulated book catalog
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
-    private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-    
-    public LibraryItem() {
-    }
 
-    public static String[] getBooks() {
-        return books;
-    }
-
-    public static void setBooks(String[] books) {
-        LibraryItem.books = books;
-    }
-
-    public static boolean[] getBookAvailability() {
-        return bookAvailability;
-    }
-
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
-    }
-    
+    /**
+     * Displays the catalog of books to the user.
+     */
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
         for (int i = 0; i < books.length; i++) {
             System.out.println((i + 1) + ". " + books[i]);
         }
     }
-    
+
+    /**
+     * Allows the user to select a book to borrow, using LibraryInventory for availability checks.
+     *
+     * Principle: Single Responsibility Principle (SRP)
+     * This method delegates availability checks and updates to LibraryInventory, following SRP.
+     */
     public static void selectBook(Scanner sc) {
         System.out.print("\nEnter the number of the book you want to borrow: ");
-        int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+        int choice = sc.nextInt() - 1;
 
         if (choice < 0 || choice >= books.length) {
             System.out.println("Invalid selection. Please try again.");
             return;
         }
 
-        if (bookAvailability[choice]) {
+        // Delegates availability check and borrow operation to LibraryInventory
+        if (LibraryInventory.isBookAvailable(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            LibraryInventory.borrowBook(choice); // Updates availability in LibraryInventory
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
     }
-    
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean continueBorrowing = true;
