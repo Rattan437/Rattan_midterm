@@ -8,23 +8,24 @@ package midtermexamf24_83052_partb;
  *
  * @author Atinder
  */
-public class BookAvailability {
+public class BookAvailability implements BookService {
     
-    private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-        
-     public static boolean[] getBookAvailability() {
-        return bookAvailability;
-    }
+    //2. Encapsulation: This principle hides direct access to data, but rather interaction with methods.
+    private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
+    private static boolean[] bookAvailability = {true, true, true, true};
 
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        BookAvailability.bookAvailability = bookAvailability;
-    }
-    
-    public static boolean isAvailable(int index){
+    @Override
+    public boolean isAvailable(int index) {
         return bookAvailability[index];
     }
-    
-    public static void borrowBook(int index){
-        bookAvailability[index] = false;
+
+    @Override
+    public void setAvailability(int index, boolean availability) {
+        bookAvailability[index] = availability;
+    }
+
+    @Override
+    public String[] getBooks() {
+        return books;
     }
 }
