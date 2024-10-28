@@ -74,7 +74,7 @@ public class LibraryItem {
             continueBorrowing = response.equals("yes");
         }
 
-        System.out.println("Thank you for using the library!");
+        System.out.println("Thank you for using the library! from Anmol");
         sc.close();
     }
 }
