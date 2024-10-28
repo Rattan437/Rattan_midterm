@@ -20,8 +20,8 @@ public class LibraryItem {
      * Allows the user to select a book to borrow, using AvailabilityChecker for availability checks.
      *
      * Principle: Single Responsibility Principle (SRP)
-     * This method delegates availability checks and updates to AvailabilityChecker, following SRP.
-     * @param sc
+     * This method is responsible for managing the user selection process, ensuring that 
+     * it does not handle any business logic regarding book availability.
      */
     public static void selectBook(Scanner sc) {
         System.out.print("\nEnter the number of the book you want to borrow: ");
