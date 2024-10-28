@@ -11,29 +11,11 @@ package midtermexamf24_83052_partb;
 
 import java.util.Scanner;
 
+/* Loose coupling - this class depends on bookAvailable but not highky dependent, we can add new features without
+disturbing user interaction in bookAvailable class */
 public class LibraryItem {
-    
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
     private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-    
-    public LibraryItem() {
-    }
-
-    public static String[] getBooks() {
-        return books;
-    }
-
-    public static void setBooks(String[] books) {
-        LibraryItem.books = books;
-    }
-
-    public static boolean[] getBookAvailability() {
-        return bookAvailability;
-    }
-
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
-    }
     
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
@@ -48,14 +30,9 @@ public class LibraryItem {
         System.out.print("\nEnter the number of the book you want to borrow: ");
         int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
 
-        if (choice < 0 || choice >= books.length) {
-            System.out.println("Invalid selection. Please try again.");
-            return;
-        }
-
         if (BookAvailable.isBookAvailable(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            BookAvailable.borrowBook(choice); // Mark the book as borrowed
+            BookAvailable.borrowBook(choice); 
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }

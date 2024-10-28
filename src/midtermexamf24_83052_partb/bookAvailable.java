@@ -7,6 +7,8 @@ package midtermexamf24_83052_partb;
  */
 public class bookAvailable {
     
+    // this class solely handles user interaction and displaying book catalog - high cohesion
+    // Encapsulation - keeping it private so that no one can modify it, instead methods are made public to access these.
     private String[] bookList; 
     private boolean[] availabilityStatus; 
 
@@ -16,15 +18,22 @@ public class bookAvailable {
     }
 
     public boolean isBookAvailable(int index) {
-        if (index < 0 || index >= availabilityStatus.length) {
-            return false; // Invalid index
-        }
-        return availabilityStatus[index];
+        return index >= 0 && index < availabilityStatus.length && availabilityStatus[index];
     }
 
     public void borrowBook(int index) {
         if (isBookAvailable(index)) {
             availabilityStatus[index] = false; // Mark the book as borrowed
         }
+    }
+
+    public void returnBook(int index) {
+        if (index >= 0 && index < availabilityStatus.length) {
+            availabilityStatus[index] = true; // Mark the book as available
+        }
+    }
+
+    public String[] getBookList() {
+        return bookList;
     }
 }
