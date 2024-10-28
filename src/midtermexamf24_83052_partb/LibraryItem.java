@@ -8,15 +8,11 @@ package midtermexamf24_83052_partb;
  *
  * @author Atinder
  */
-
-import java.util.Scanner;
-
 import java.util.Scanner;
 
 public class LibraryItem {
     
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
-    private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
     
     public LibraryItem() {
     }
@@ -27,14 +23,6 @@ public class LibraryItem {
 
     public static void setBooks(String[] books) {
         LibraryItem.books = books;
-    }
-
-    public static boolean[] getBookAvailability() {
-        return bookAvailability;
-    }
-
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
     }
     
     public static void displayCatalog() {
@@ -53,9 +41,9 @@ public class LibraryItem {
             return;
         }
 
-        if (bookAvailability[choice]) {
+        if (BookAvailability.isAvailable(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            BookAvailability.borrowBook(choice);// Mark the book as borrowed
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
