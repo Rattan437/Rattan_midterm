@@ -18,9 +18,12 @@ public class LibraryItem {
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
     private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
     
+    //an empty constructor for values input
     public LibraryItem() {
     }
-
+    
+    //getter and setters are created for books and bookAvailability
+    //It is called encapsulatiuon. It is done to hide the data from the user so that they cannot make any changes.
     public static String[] getBooks() {
         return books;
     }
@@ -37,6 +40,7 @@ public class LibraryItem {
         LibraryItem.bookAvailability = bookAvailability;
     }
     
+    //It is a method to display the books that are available
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
         for (int i = 0; i < books.length; i++) {
@@ -53,8 +57,13 @@ public class LibraryItem {
             return;
         }
         
+        //Object of class BookAvailability is Instanciated to access the class through an object
         BookAvailability find = new BookAvailability();
-
+        
+        //Here the if/else is run using the separated class of object find.
+        //High Cohesion aqnd low coupling are used here.
+        //low coupling makes each and every class independent upto an extent 
+        //High cohesion is to give a particular task to every method
         if (find.bookAva(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
             bookAvailability[choice] = false;
