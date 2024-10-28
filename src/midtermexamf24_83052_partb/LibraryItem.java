@@ -11,8 +11,6 @@ package midtermexamf24_83052_partb;
 
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class LibraryItem {
     
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
@@ -44,18 +42,18 @@ public class LibraryItem {
         }
     }
     
-    public static void selectBook(Scanner sc) {
+   public static void selectBook(Scanner sc) {
         System.out.print("\nEnter the number of the book you want to borrow: ");
-        int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+        int choice = sc.nextInt() - 1; 
 
         if (choice < 0 || choice >= books.length) {
             System.out.println("Invalid selection. Please try again.");
             return;
         }
 
-        if (bookAvailability[choice]) {
+        if (BookAvailabilityChecker.isAvailable(choice, bookAvailability)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            BookAvailabilityChecker.markAsBorrowed(choice, bookAvailability); 
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
