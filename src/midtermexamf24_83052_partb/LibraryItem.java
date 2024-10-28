@@ -21,6 +21,7 @@ public class LibraryItem {
     public LibraryItem() {
     }
 
+    //Encapsulation applied by using getter and setter methods for accessing private arrays in LibraryItem.
     public static String[] getBooks() {
         return books;
     }
