@@ -38,10 +38,11 @@ public class LibraryItem {
     }
     
     public static void displayCatalog() {
-        System.out.println("Welcome to the library! Here is a list of available books:");
-        for (int i = 0; i < books.length; i++) {
-            System.out.println((i + 1) + ". " + books[i]);
-        }
+    System.out.println("Welcome to the library! Here is a list of available books:");
+    for (int i = 0; i < books.length; i++) {
+        String availability = bookAvailability[i] ? "Available" : "Unavailable";
+        System.out.println((i + 1) + ". " + books[i] + " - " + availability);
+    }
     }
     
     public static void selectBook(Scanner sc) {
