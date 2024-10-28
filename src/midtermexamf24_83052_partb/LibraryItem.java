@@ -52,15 +52,17 @@ public class LibraryItem {
             System.out.println("Invalid selection. Please try again.");
             return;
         }
-
-        if (bookAvailability[choice]) {
+        
+        
+        if (LibarayAvailability.bookAvailable(choice)){
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            LibarayAvailability.borrowedBook(choice); // Mark the book as borrowed
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
-    }
-    
+        
+     }
+  
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean continueBorrowing = true;
