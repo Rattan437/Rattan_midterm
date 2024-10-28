@@ -4,37 +4,21 @@
  */
 package midtermexamf24_83052_partb;
 
-/**
- *
- * @author fagun
- */
-
-import java.util.Scanner;
-
 import java.util.Scanner;
 
 public class LibraryItem {
-    
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
     private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
-    
-    public LibraryItem() {
-    }
+
+    // Constructor
+    public LibraryItem() {}
 
     public static String[] getBooks() {
         return books;
     }
 
-    public static void setBooks(String[] books) {
-        LibraryItem.books = books;
-    }
-
     public static boolean[] getBookAvailability() {
         return bookAvailability;
-    }
-
-    public static void setBookAvailability(boolean[] bookAvailability) {
-        LibraryItem.bookAvailability = bookAvailability;
     }
     
     public static void displayCatalog() {
@@ -43,24 +27,28 @@ public class LibraryItem {
             System.out.println((i + 1) + ". " + books[i]);
         }
     }
-    
+
     public static void selectBook(Scanner sc) {
-       System.out.print("\nEnter the number of the book you want to borrow: ");
-    int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+        // Pass the bookAvailability array to the BookAvailabilityChecker
+        BookAvailabilityChecker checker = new BookAvailabilityChecker(bookAvailability);
 
-    if (choice < 0 || choice >= books.length) {
-        System.out.println("Invalid selection. Please try again.");
-        return;
+        System.out.print("\nEnter the number of the book you want to borrow: ");
+        int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+
+        if (choice < 0 || choice >= books.length) {
+            System.out.println("Invalid selection. Please try again.");
+            return;
+        }
+
+        // Check if the book is available
+        if (checker.isBookAvailable(choice)) {
+            System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
+            checker.borrowBook(choice); // Mark the book as borrowed
+        } else {
+            System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
+        }
     }
 
-    if (bookAvailability[choice]) {
-        System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-        bookAvailability[choice] = false; // Mark the book as borrowed
-    } else {
-        System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
-    }
-    }
-    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean continueBorrowing = true;

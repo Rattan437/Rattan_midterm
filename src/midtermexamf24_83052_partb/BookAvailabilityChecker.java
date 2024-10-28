@@ -4,12 +4,14 @@
  */
 package midtermexamf24_83052_partb;
 
-/**
- *
- * @author av506
- */
 public class BookAvailabilityChecker {
- private static boolean[] bookAvailability = LibraryItem.getBookAvailability();
+
+    private boolean[] bookAvailability;
+    
+    // Constructor that takes the book availability array
+    public BookAvailabilityChecker(boolean[] bookAvailability) {
+        this.bookAvailability = bookAvailability;
+    }
 
     // This method checks if a book is available based on its index
     public boolean isBookAvailable(int index) {
