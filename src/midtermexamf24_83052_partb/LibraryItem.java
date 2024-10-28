@@ -53,7 +53,7 @@ public class LibraryItem {
             return;
         }
 
-        if (bookAvailability[choice]) {
+        if (CheckAvailability.isBookAvailable(choice)) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
             bookAvailability[choice] = false; // Mark the book as borrowed
         } else {
