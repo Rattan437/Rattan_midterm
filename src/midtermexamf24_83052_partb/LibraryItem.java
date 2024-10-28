@@ -45,20 +45,20 @@ public class LibraryItem {
     }
     
     public static void selectBook(Scanner sc) {
-        System.out.print("\nEnter the number of the book you want to borrow: ");
-        int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+       System.out.print("\nEnter the number of the book you want to borrow: ");
+    int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
 
-        if (choice < 0 || choice >= books.length) {
-            System.out.println("Invalid selection. Please try again.");
-            return;
-        }
+    if (choice < 0 || choice >= books.length) {
+        System.out.println("Invalid selection. Please try again.");
+        return;
+    }
 
-        if (bookAvailability[choice]) {
-            System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
-        } else {
-            System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
-        }
+    if (bookAvailability[choice]) {
+        System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
+        bookAvailability[choice] = false; // Mark the book as borrowed
+    } else {
+        System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
+    }
     }
     
     public static void main(String[] args) {
