@@ -16,37 +16,32 @@ public class LibraryItem {
     private static String[] books = {"The Great Gatsby", "1984", "To Kill a Mockingbird", "The Catcher in the Rye"};
     private static boolean[] bookAvailability = {true, true, true, true}; // Initially all books are available
     
+    public static String[] getBooks() {
+        return books;
+    }
+
+    public static boolean[] getBookAvailability() {
+        return bookAvailability;
+    }
+
     public static void displayCatalog() {
         System.out.println("Welcome to the library! Here is a list of available books:");
         for (int i = 0; i < books.length; i++) {
             System.out.println((i + 1) + ". " + books[i] + (bookAvailability[i] ? " (Available)" : " (Unavailable)"));
         }
     }
-
-    public static void selectBook(int choice) {
-        if (choice < 0 || choice >= books.length) {
-            System.out.println("Invalid selection. Please try again.");
-            return;
-        }
-
-        if (bookAvailability[choice]) {
-            System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
-        } else {
-            System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
-        }
-    }
-
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        BookSelector selector = new BookSelector(); // Instantiate the BookSelector class
         boolean continueBorrowing = true;
 
         while (continueBorrowing) {
             displayCatalog();
-            
             System.out.print("\nEnter the number of the book you want to borrow: ");
             int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
-            selectBook(choice);
+
+            selector.selectBook(new LibraryItem(), choice); // Use BookSelector for selection
 
             System.out.print("\nWould you like to borrow another book? (yes/no): ");
             String response = sc.next().trim().toLowerCase();
